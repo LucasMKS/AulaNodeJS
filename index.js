@@ -1,11 +1,23 @@
-/*Criando servidor e testando browser*/
-var http = require('http');
+var express = require('express');
+var app = express();
+/*
+var port = 8030;
+var hostname = '127.0.0.1';
+*/
+var port = process.env.PORT;
 
-http.createServer(function (req, res) {
-  console.log("Servidor online");
-  res.writeHead(200, {'Content-Type': 'text/plain'});
-  res.write("Boa noite");
-  console.log("Escreveu");
-  res.end();
-  console.log("Finalizou");
-}).listen(8082);
+//http: //127.0.0.1:8030
+app.get('/', function(req, res) {
+res.statusCode = 200;
+res.setHeader('Content-Type', 'text/plain; charset=utf-8');
+res.send('Boa noite turma de SD');
+});
+//http://127.0.0.1:8030/info
+app.get('/info', function(req, res) {
+res.statusCode = 200;
+res.setHeader('Content-Type', 'text/plain; charset=utf-8');
+res.send('Esta é a página de informação.');
+});
+app.listen(port, function() {
+console.log(`O servidor foi iniciado`);
+});
